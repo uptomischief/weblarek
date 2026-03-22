@@ -156,11 +156,11 @@ Presenter - презентер содержит основную логику п
 `_selectedProduct: IProduct | null` - подробное отображение товара в модальном окне (выбранная карточка)
 
 Методы класса:
-`setProducts(products:IProduct[]): void)` - сохраняет массив товаров, полученный в параметре `products` в поле `_products`
-`getProducts():IProduct[]` - возвращает массиы всех товаров каталога из поля `_products`
-`getProduct(id:string):IProduct | undefined` - возвращает товар по его иеднтификатору
-`setSelectedProduct(product: IProduct | null):void` - сохраняет товар для отображения в поле `_selectedProduct`
-`getSelectedProduct(): IProduct | null` - возвращает товар, выбранный для отображения 
+`setProducts(products: IProduct[]): void{}` - сохраняет массив товаров, полученный в параметре `products` в поле `_products`
+`getProducts(): IProduct[]{}` - возвращает массиы всех товаров каталога из поля `_products`
+`getProduct(id:string): IProduct | undefined{}` - возвращает товар по его иеднтификатору
+`setSelectedProduct(product: IProduct | null):void{}` - сохраняет товар для отображения в поле `_selectedProduct`
+`getSelectedProduct(): IProduct | null{}` - возвращает товар, выбранный для отображения 
 
 #### Класс Basket
 Отвечает за хранение и управление товарами, которые пользователь добавил в корзину 
