@@ -193,9 +193,10 @@ Presenter - презентер содержит основную логику п
 `_phone: string` - номер телефона покупателя 
 
 Методы класса:
-`setPayment(payment: TPayment): void` - сохраняет способ оплаты
-`setAddress(address: string): void` - сохраняет адресс доставки
-`setPhone(phone:string): void` - сохраняет почту
-`getData(): IBuyer` - возвращает объект с данными покупателя
-`clear(): void` - очистка всех данных покупателя
-`validate(): ValidationErrors` - валидация данных покупателя
+`setPayment(payment: TPayment): void {}` - сохраняет способ оплаты
+`setAddress(address: string): void {}` - сохраняет адресс доставки
+`setPhone(phone:string): void {}` - сохраняет номер телефона
+`setEmail(email:string): void {}` - сохраняет почту
+`getData(): IBuyer {}` - возвращает объект с данными покупателя
+`clear(): void {}` - очистка всех данных покупателя
+`validate(): ValidationErrors {}` - валидация данных покупателя
