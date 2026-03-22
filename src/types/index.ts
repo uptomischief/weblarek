@@ -11,7 +11,7 @@ export interface IProduct {
     image: string;
     title: string;
     category: string;
-    ptice: number | null;
+    price: number | null;
 }
 
 export interface IBuyer {

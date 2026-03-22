@@ -114,7 +114,7 @@ Presenter - презентер содержит основную логику п
 `image: string` - путь к картинке товара
 `title: string` - название товара 
 `category: string` - категория товара 
-`ptice: number | null` - цена товара 
+`price: number | null` - цена товара 
 
 #### IBuyer
 Описывает данные покупателя, которые используются для оформления заказа
@@ -156,11 +156,11 @@ Presenter - презентер содержит основную логику п
 `_selectedProduct: IProduct | null` - подробное отображение товара в модальном окне (выбранная карточка)
 
 Методы класса:
-`setProducts(products: IProduct[]): void{}` - сохраняет массив товаров, полученный в параметре `products` в поле `_products`
-`getProducts(): IProduct[]{}` - возвращает массиы всех товаров каталога из поля `_products`
-`getProduct(id:string): IProduct | undefined{}` - возвращает товар по его иеднтификатору
-`setSelectedProduct(product: IProduct | null):void{}` - сохраняет товар для отображения в поле `_selectedProduct`
-`getSelectedProduct(): IProduct | null{}` - возвращает товар, выбранный для отображения 
+`setProducts(products: IProduct[]): void {}` - сохраняет массив товаров, полученный в параметре `products` в поле `_products`
+`getProducts(): IProduct[] {}` - возвращает массиы всех товаров каталога из поля `_products`
+`getProduct(id: string): IProduct | undefined {}` - возвращает товар по его иеднтификатору
+`setSelectedProduct(product: IProduct | null):void {}` - сохраняет товар для отображения в поле `_selectedProduct`
+`getSelectedProduct(): IProduct | null {}` - возвращает товар, выбранный для отображения 
 
 #### Класс Basket
 Отвечает за хранение и управление товарами, которые пользователь добавил в корзину 
@@ -172,13 +172,13 @@ Presenter - презентер содержит основную логику п
 `_items: IProduct[]` - массив товаров корзины
 
 Методы класса:
-`gerItems():IProduct[]` - возвращает массив товар в корзине
-`addItem(item:IProduct):void` - добавляет товар в массив корзина 
-`removeItem(id: string): void` - удаляет товар из массива корзина
-`clear(): void` - очистка корзины
-`getTotal(): number` - общая стоимость товаров в корзине
-`gerCount(): number` - количество товаров в корзине
-`contains(id: string): boolean` - проверка наличия товара
+`getItems(): IProduct[] {}` - возвращает массив товар в корзине
+`addItem(item: IProduct): void {}` - добавляет товар в массив корзина 
+`removeItem(id: string): void {}` - удаляет товар из массива корзина
+`clear(): void {}` - очистка корзины
+`getTotal(): number {}` - общая стоимость товаров в корзине
+`getCount(): number {}` - количество товаров в корзине
+`contains(id: string): boolean {}` - проверка наличия товара
 
 #### Класс Buyer
 Отвечает за хранение, обновление и валидацию данных покупателя при оформлении заказа
