@@ -6,7 +6,7 @@ import { apiProducts } from './utils/data';
 
 const catalog = new Catalog ();
 const basket = new Basket();
-// const buyer = new Buyer();
+const buyer = new Buyer();
 
 // Класс Catalog
 console.log ('Catalog');
@@ -52,3 +52,18 @@ basket.clear();
 console.log('очистили корзину -> количесвто: ', basket.getCount(), 'со стоимостью: ', basket.getTotal());
 
 // Класс Buyer
+console.log ('Buyer');
+
+console.log('пустота = ошибочки: ', buyer.validate())
+
+buyer.setPayment('card');
+buyer.setAddress('Москва-Петушки, Ерофеев, 1');
+buyer.setPhone('+375291111111');
+buyer.setEmail('mail@mail.com');
+
+console.log('заполненый: ', buyer.validate());
+
+console.log('Данные: ', buyer.getData());
+
+buyer.clear();
+console.log('Очистка = ошибочки: ', buyer.validate())
