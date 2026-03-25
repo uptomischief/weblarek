@@ -29,3 +29,18 @@ export interface ValidationErrors {
     phone?: string;
     address?: string;
 }
+
+export interface IProductList {
+    total: number;
+    items: IProduct[]
+}
+
+export type IOrder = IBuyer & {
+    items: string;
+    total: number;
+}
+
+export interface IOrderResalt {
+    id: string;
+    total: number;
+}
