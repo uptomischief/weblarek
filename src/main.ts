@@ -3,10 +3,15 @@ import { Catalog } from './components/base/models/Catalog';
 import { Basket } from './components/base/models/Basket';
 import { Buyer } from './components/base/models/Buyer';
 import { apiProducts } from './utils/data';
+import { Api } from './components/base/Api';
+import { API_URL } from './utils/constants';
+import { WebLarekApi } from './components/base/models/WebLarekApi';
 
 const catalog = new Catalog ();
 const basket = new Basket();
 const buyer = new Buyer();
+const api = new Api(API_URL);
+const weblarekapi = new WebLarekApi(api);
 
 // Класс Catalog
 console.log ('Catalog');
@@ -67,3 +72,15 @@ console.log('Данные: ', buyer.getData());
 
 buyer.clear();
 console.log('Очистка = ошибочки: ', buyer.validate())
+
+// Класс WebLarekApi
+console.log('Api')
+
+weblarekapi.getProducts()
+    .then((data) => {
+        catalog.setProducts(data.items);
+        console.log('Каталог получен с сервера: ', catalog.getProducts());
+    })
+    .catch((error) => {
+        console.error ('Ошибка получения данных с сервера: ', error);
+    });
