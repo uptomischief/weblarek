@@ -32,7 +32,7 @@ export interface ValidationErrors {
 
 export interface IProductList {
     total: number;
-    items: IProduct[]
+    items: IProduct[];
 }
 
 export type IOrder = IBuyer & {
