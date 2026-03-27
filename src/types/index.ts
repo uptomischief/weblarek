@@ -36,7 +36,7 @@ export interface IProductList {
 }
 
 export type IOrder = IBuyer & {
-    items: string;
+    items: string[];
     total: number;
 }
 
