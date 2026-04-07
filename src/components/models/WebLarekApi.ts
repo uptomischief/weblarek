@@ -1,4 +1,4 @@
-import { IApi, IProductList, IOrder, IOrderResalt } from "../../../types";
+import { IApi, IProductList, IOrder, IOrderResalt } from "../../types";
 
 export class WebLarekApi {
     // Поля класса:

@@ -1,11 +1,11 @@
 import './scss/styles.scss';
-import { Catalog } from './components/base/models/Catalog';
-import { Basket } from './components/base/models/Basket';
-import { Buyer } from './components/base/models/Buyer';
+import { Catalog } from './components/models/Catalog';
+import { Basket } from './components/models/Basket';
+import { Buyer } from './components/models/Buyer';
 import { apiProducts } from './utils/data';
 import { Api } from './components/base/Api';
 import { API_URL } from './utils/constants';
-import { WebLarekApi } from './components/base/models/WebLarekApi';
+import { WebLarekApi } from './components/models/WebLarekApi';
 
 const catalog = new Catalog ();
 const basket = new Basket();
