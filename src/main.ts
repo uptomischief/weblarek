@@ -6,6 +6,7 @@ import { apiProducts } from './utils/data';
 import { Api } from './components/base/Api';
 import { API_URL } from './utils/constants';
 import { WebLarekApi } from './components/models/WebLarekApi';
+import { Header } from './components/View/Header';
 
 const catalog = new Catalog ();
 const basket = new Basket();

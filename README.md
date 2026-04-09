@@ -252,7 +252,7 @@ Presenter - презентер содержит основную логику п
 Отвечает за отображение основных элементов главной страницы
 
 Конструктор:
-`constructor(container: HTMLElement, events: IEvents)` - принимает контейнер всей страницы и брокер событий
+`constructor(container: HTMLElement, protected events: IEvents){}` - принимает контейнер всей страницы и брокер событий
 
 Поля класса:
 `_counter: HTMLElement` - элемент для отображения количества товаров в корзине
@@ -261,9 +261,9 @@ Presenter - презентер содержит основную логику п
 `_wrapper: HTMLElement` - основной контейнер страницы
 
 Сеттеры:
-`set counter(value: number)` - обновляет значение счетчика товаров
-`set catalog(items: HTMLElement[])` - устанавливает содержимое каталога
-`set locked(value: boolean)` - управляет блокировкой скролла страницы при открытии модальных окон
+`set counter(value: number) {}` - обновляет значение счетчика товаров
+`set catalog(items: HTMLElement[]) {}` - устанавливает содержимое каталога
+`set locked(value: boolean) {}` - управляет блокировкой скролла страницы при открытии модальных окон
 
 
 #### Класс Card<T>
@@ -282,7 +282,7 @@ Cеттеры:
 `set price(value: number | null)` - цена товара 
 
 Методы класса:
-`render(data: IProduct): HTMLElement` - карточка с данными
+`abstract render(data: IProduct): HTMLElement` - карточка с данными
 
 #### Класс CardCatalog
 Карточка товара в каталоге 
