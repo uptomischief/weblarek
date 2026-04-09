@@ -248,37 +248,67 @@ Presenter - презентер содержит основную логику п
 
 ## Слой Представления (View)
 
-#### Класс Card
+#### Класс Header
+Отвечает за отображение основных элементов главной страницы
+
+Конструктор:
+`constructor(container: HTMLElement, events: IEvents)` - принимает контейнер всей страницы и брокер событий
+
+Поля класса:
+`_counter: HTMLElement` - элемент для отображения количества товаров в корзине
+`_basket: HTMLElement` - элемент иконки корзины
+`_catalog: HTMLElement` - контейнер для отображения карточек товаров
+`_wrapper: HTMLElement` - основной контейнер страницы
+
+Сеттеры:
+`set counter(value: number)` - обновляет значение счетчика товаров
+`set catalog(items: HTMLElement[])` - устанавливает содержимое каталога
+`set locked(value: boolean)` - управляет блокировкой скролла страницы при открытии модальных окон
+
+
+#### Класс Card<T>
 Абстрактный класс для всех карточек товаров. Содержит общую логику работы с данными товара
 
 Конструктор:
-`constructor(container: HTMLElemtnt, events: IEvents)` - Принимает DOM-элемент и брокер событий 
+`constructor(container: HTMLElement, events: IEvents)` - Принимает DOM-элемент и брокер событий 
 
 Поля класса:
 `container: HTMLElement` - корневой элемент карточки
 `events: IEvents` - брокер событий 
 `id: string` - id товара
 
-Методы класса:
+Cеттеры:
 `set title(value: string)` - название товара 
 `set price(value: number | null)` - цена товара 
+
+Методы класса:
 `render(data: IProduct): HTMLElement` - карточка с данными
 
 #### Класс CardCatalog
 Карточка товара в каталоге 
 
+Конструктор:
+`constructor(container: HTMLElement, events: IEvents)` - Принимает DOM-элемент и брокер событий 
+
 Сеттеры:
 `set category(value: string)` - категория карточки товара
 `set image(value: string)` - изображение 
 
+События:
+`card: select` - нажать на карточку
+
 #### Класс CardPreview
 Карточка товара в можельном окне просмотра
+
+Конструктор:
+`constructor(container: HTMLElement, events: IEvents)` - Принимает DOM-элемент и брокер событий
 
 Сеттеры:
 `set description(value: string)` - описание товара
 `set image(value: string)` - изображение
 `set category(value: string)` - категория картчки товара
 `set inbasket(value: boolean)` - кпока состояния товара в корзине
+`set unavailable(value: boolean)` - блокиолвка кнопки, если товар недоступен
 
 События:
 `card: add` - добавить в корзину
@@ -287,29 +317,107 @@ Presenter - презентер содержит основную логику п
 #### Класс CardBasket
 Карточка товара в корзине
 
+Конструктор:
+`constructor(container: HTMLElement, events: IEvents)` - Принимает DOM-элемент и брокер событий
+
 Сеттеры:
 `set index(value: number)` - порядковый номер в списке
 
-события:
+Cобытия:
 `card: remove` - убрать из корзины
 
 #### Класс Form<T>
 Абстрактный класс для всех форм. Сдержит общую логику валидации и работы с ощибками
 
+Конструктор:
+`constructor(continer: HTMLFormElement, events: IEvents)` - принимает форму и брокер событий 
+
+Поля класса:
+`container: HTMLFormElement` - форма
+`events: IEvents` - брокер событий 
+`submitButton: HTMLButtonElement` - кнопка отправки
+`errorsElement: HTMLElement` - отображение ошибок
+
+Сеттеры:
+`set valid(value: boolean)` - активатор кнопки
+`set errors(value: string)` - отобажение ошибки
+
+Методы класса:
+`render(state: Partial<T> & {valid: boolean; errors: string[]}): HTMLElement` - принимает объект состояние и возвращает DOM-элемент
+
+
 #### Класс OrderForm
 Форма заказа -> выбрать способ оплаты и ввод адреса
+
+Конструктор:
+`constructor(continer: HTMLFormElement, events: IEvents)` - принимает форму и брокер событий 
+
+Сеттеры:
+`set payment(value: TPayment)` - выбратьспособ оплаты
+`set address(value: string)`- выбрать адресс
+
+События:
+`order.payment: change` - изменить способ оплаты
+`order.address: change` - изменить адресс
+`order: submit` - отправить форму
 
 #### Класс ContactsForm
 Форма контактов -> email и номер телефона
 
+Конструктор:
+`constructor(continer: HTMLFormElement, events: IEvents)` - принимает форму и брокер событий 
+
+Сеттеры:
+`set email(value: string)` - email
+`set phone(value: string)` - телефон
+
+События:
+`contacts.email: change` - изменить email
+`contacts.phone: change` - изменить телефон
+`contacts: submit` - отправить форму
+
 #### Класс Basket
 Компонент корзины. Отображает список товаров и из общую стоимость
+
+Конструктор:
+`constructor(continer: HTMLFormElement, events: IEvents)` - принимает контейнер корзины и брокер событий 
+
+Поля класса:
+`list: HTMLElement` - контейнер для списка товаров
+`total: HTMLElement` - элемент итоговой стоимости
+`button: HTMLButtonElement` - кнопка "Оформить"
+
+Сеттеры:
+`set items(items: HTMLElement[])` - обновить список товаров
+`set total(value: number)` - установить общую стоимость
+`set valid(value: boolean)` - активатор кнопки
+
+События:
+`basket: order` - нажать "Оформить"
 
 #### Класс Modal
 Модальное окно
 
+Конструктор:
+`constructor(container: HTMLElement, events: IEvents)` - принимает контейнер модального окна и брокер событий
+
+Поля класса:
+`container: HTMLElement` - контейнер модал
+`content: HTMLElement` - контейнер для контента
+`closeButton: HTMLButtonElement` - кнопка закрытия
+
+Методы класса:
+`open(content: HTMLElement): void`- открывает модал
+`close(): void`- закрывает модал
+
+События:
+`modal: close` - закрыть модал
+
 #### Класс Success
 Успешное формление заказа (сообщение)
+
+Конструктор:
+`constructor(container: HTMLElement, events: IEvents)` - принимает контейнер и брокер событий
 
 Сеттеры:
 `set total(value: number)` - итоговая списанная сумма
