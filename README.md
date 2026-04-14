@@ -248,6 +248,50 @@ Presenter - презентер содержит основную логику п
 
 ## Слой Представления (View)
 
+### Интерфейсы компонентов представления 
+
+### Интерфейс ICardActions
+Используется для передачи обработчиков событий ы карточку
+
+`onClick: (event: MouseEvent) => void` - действие при клике на карточку
+
+### Интерфейс IModalData
+Описывает данные для отображения в модальном окне
+
+`content: HTMLElement` - элкмент, который будет помещен внутрь окна
+
+### Интерфейс IFormState
+Описывает состояние валидации формы
+
+`valid: boolean` - доступна (да/нет) кнопка отправки
+`errors: string[]` - массив сообщений об ощибках
+
+### Интерфейс ISuccess
+Данные для отобрадения в окне успешного заказа
+
+`total: number` - итоговая сумма списанных денег
+
+### Интерфейс ISuccessActions
+Действия в окне успеха
+
+`onClick: () => void` - действие возврат к покупкам
+
+### Классы слоя Представления 
+
+#### Класс Page
+Компонент управления основными контейнерами страницы
+
+Конструктор:
+`constructor(container: HTMLElement, events: IEvents)` - принимает корневой элемент страницы и брокер событий
+
+Поля класса:
+`_catalog: HTMLElement` - контейнер для карточек товаров на главной
+`_wrapper: HTMLElement` - основной контейнер страницы
+
+Сеттеры:
+`set catalog(items: HTMLElement[]) {}` - заменяет содержимое галереи товаров
+`set locked(value: boolean) {}` - ключает или выключает блокировку прокрутки
+
 #### Класс Header
 Отвечает за отображение основных элементов главной страницы
 
@@ -265,95 +309,76 @@ Presenter - презентер содержит основную логику п
 `set catalog(items: HTMLElement[]) {}` - устанавливает содержимое каталога
 `set locked(value: boolean) {}` - управляет блокировкой скролла страницы при открытии модальных окон
 
-
-#### Класс Card<T>
-Абстрактный класс для всех карточек товаров. Содержит общую логику работы с данными товара
+#### Класс Card
+Базовый компонент для отображения карточки товара
+Используется для формирования карточек в каталоге, превью и корзине
 
 Конструктор:
-`constructor(container: HTMLElement, events: IEvents)` - Принимает DOM-элемент и брокер событий 
+`constructor(container: HTMLElement, actions?: ICardActions)` - принимает контейнер карточки и объект с обработчиками событий 
 
 Поля класса:
-`container: HTMLElement` - корневой элемент карточки
-`events: IEvents` - брокер событий 
-`id: string` - id товара
+`_title: HTMLElement` - заголовок
+`_price: HTMLElement` - цена
+`_image?: HTMLImageElement | null` - картинка
+`_category?: HTMLElement | null` - категория
+`_description?: HTMLElement | null` - описание
+`_button?: HTMLButtonElement | null` - кнопка действия
+`_index?: HTMLElement | null` - порядковый номер
 
 Cеттеры:
 `set title(value: string)` - название товара 
 `set price(value: number | null)` - цена товара 
+`set id(value: string)` - идентификатор в dataset контейнера
+`set image(value: string)` - адрес изображения
+`set category(value: string)` - категория
+`set description(value: string)` - текст описания 
+`set buttonText(value: string)` - меняет текст на кнопке
+`set index(value: number)` - устанавливает порядеовый номер
 
-Методы класса:
-`abstract render(data: IProduct): HTMLElement` - карточка с данными
+Геттеры:
+`get id(): string` - возвращает id карточки
+`get title(): string` - возвращает заголовок
 
 #### Класс CardCatalog
-Карточка товара в каталоге 
-
-Конструктор:
-`constructor(container: HTMLElement, events: IEvents)` - Принимает DOM-элемент и брокер событий 
-
-Сеттеры:
-`set category(value: string)` - категория карточки товара
-`set image(value: string)` - изображение 
-
-События:
-`card: select` - нажать на карточку
+Дочерний компонент класса Card
+Используется для отображения карточки на главной странице
 
 #### Класс CardPreview
-Карточка товара в можельном окне просмотра
-
-Конструктор:
-`constructor(container: HTMLElement, events: IEvents)` - Принимает DOM-элемент и брокер событий
-
-Сеттеры:
-`set description(value: string)` - описание товара
-`set image(value: string)` - изображение
-`set category(value: string)` - категория картчки товара
-`set inbasket(value: boolean)` - кпока состояния товара в корзине
-`set unavailable(value: boolean)` - блокиолвка кнопки, если товар недоступен
-
-События:
-`card: add` - добавить в корзину
-`card: remove` - убрать из корзины
+Дочерний компонент класса Card
+Используется для отображения детальной информации о товаре в модальном окне
 
 #### Класс CardBasket
-Карточка товара в корзине
-
-Конструктор:
-`constructor(container: HTMLElement, events: IEvents)` - Принимает DOM-элемент и брокер событий
-
-Сеттеры:
-`set index(value: number)` - порядковый номер в списке
-
-Cобытия:
-`card: remove` - убрать из корзины
+Дочерний компонент класса Card
+Используется для отображения товара в списке корзины
 
 #### Класс Form<T>
-Абстрактный класс для всех форм. Сдержит общую логику валидации и работы с ощибками
+Сдержит общую логику валидации и работы с ощибками
 
 Конструктор:
 `constructor(continer: HTMLFormElement, events: IEvents)` - принимает форму и брокер событий 
 
 Поля класса:
-`container: HTMLFormElement` - форма
-`events: IEvents` - брокер событий 
-`submitButton: HTMLButtonElement` - кнопка отправки
-`errorsElement: HTMLElement` - отображение ошибок
+`_submit: HTMLButtonElement` - кнопка отправки
+`_errors: HTMLElement` - отображение ошибок
 
 Сеттеры:
 `set valid(value: boolean)` - активатор кнопки
 `set errors(value: string)` - отобажение ошибки
 
 Методы класса:
-`render(state: Partial<T> & {valid: boolean; errors: string[]}): HTMLElement` - принимает объект состояние и возвращает DOM-элемент
-
+`onInputChange(field: string, value: string): void` - генерирует событие изменения поля
 
 #### Класс OrderForm
 Форма заказа -> выбрать способ оплаты и ввод адреса
 
 Конструктор:
-`constructor(continer: HTMLFormElement, events: IEvents)` - принимает форму и брокер событий 
+`constructor(conyainer: HTMLElement, events: IEvents)` - принимает элемент формы и брокер событий
+
+Поля класса:
+`_buttons: HTMLButtonElement[]` - кнопки способов оплаты
 
 Сеттеры:
-`set payment(value: TPayment)` - выбратьспособ оплаты
+`set payment(value: TPayment)` - выбрать способ оплаты
 `set address(value: string)`- выбрать адресс
 
 События:
@@ -376,16 +401,16 @@ Cобытия:
 `contacts.phone: change` - изменить телефон
 `contacts: submit` - отправить форму
 
-#### Класс Basket
+#### Класс BasketView
 Компонент корзины. Отображает список товаров и из общую стоимость
 
 Конструктор:
 `constructor(continer: HTMLFormElement, events: IEvents)` - принимает контейнер корзины и брокер событий 
 
 Поля класса:
-`list: HTMLElement` - контейнер для списка товаров
-`total: HTMLElement` - элемент итоговой стоимости
-`button: HTMLButtonElement` - кнопка "Оформить"
+`_list: HTMLElement` - контейнер для списка товаров
+`_total: HTMLElement` - элемент итоговой стоимости
+`_b_utton: HTMLButtonElement` - кнопка "Оформить"
 
 Сеттеры:
 `set items(items: HTMLElement[])` - обновить список товаров
@@ -399,28 +424,33 @@ Cобытия:
 Модальное окно
 
 Конструктор:
-`constructor(container: HTMLElement, events: IEvents)` - принимает контейнер модального окна и брокер событий
+`constructor(container: HTMLElement, protected events: IEvents) {}` - принимает контейнер модального окна и брокер событий
 
 Поля класса:
-`container: HTMLElement` - контейнер модал
-`content: HTMLElement` - контейнер для контента
-`closeButton: HTMLButtonElement` - кнопка закрытия
+`_content: HTMLElement` - контейнер для контента
+`_closeButton: HTMLButtonElement` - кнопка закрытия
 
 Методы класса:
-`open(content: HTMLElement): void`- открывает модал
+`open(): void`- открывает модал
 `close(): void`- закрывает модал
+`render(data: IModalData): HTMLElement` - заполняет окно контентом и открывает его
+
+Сеттеры:
+`set content(value: HTMLElement) {}` - устанавливает элемент внутрь модального окна
 
 События:
+`modal:open` - открытие модал
 `modal: close` - закрыть модал
 
 #### Класс Success
 Успешное формление заказа (сообщение)
 
 Конструктор:
-`constructor(container: HTMLElement, events: IEvents)` - принимает контейнер и брокер событий
+`constructor(container: HTMLElement, actions: ISuccessActions)` - принимает контейнер и объект с коллбеком
 
 Сеттеры:
 `set total(value: number)` - итоговая списанная сумма
 
-События:
-`success: close` - кнопка "За новыми покупками!"
+Поля класса:
+`_close: HTMLElement` - кнопка "За новыми покупками!"
+`_total: HTMLElement` - элемент для вывода итоговой суммы
