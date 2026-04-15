@@ -1,13 +1,17 @@
 import { IProduct } from '../../types';
+import { IEvents } from '../base/Events';
 
 export class Catalog {
     // Поля класса:
     private _products: IProduct[] = [];
     private _selectedProduct: IProduct | null = null;
 
+    constructor(protected events: IEvents) {}
+
     // Методы класса:
     setProducts(products: IProduct[]): void {
         this._products = products;
+        this.events.emit('item:changed', {catalog: this._products});
     }
 
     getProducts(): IProduct[] {
@@ -18,8 +22,9 @@ export class Catalog {
         return this._products.find(product => product.id === id)
     }
 
-    setSelectedProduct(product: IProduct | null):void {
+    setSelectedProduct(product: IProduct):void {
         this._selectedProduct = product;
+        this.events.emit('card:select', product);
     }
 
     getSelectedProduct(): IProduct | null {

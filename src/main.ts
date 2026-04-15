@@ -6,11 +6,12 @@ import { apiProducts } from './utils/data';
 import { Api } from './components/base/Api';
 import { API_URL } from './utils/constants';
 import { WebLarekApi } from './components/models/WebLarekApi';
-import { Header } from './components/View/Header';
+import { EventEmitter } from './components/base/Events';
 
-const catalog = new Catalog ();
-const basket = new Basket();
-const buyer = new Buyer();
+const events = new EventEmitter();
+const catalog = new Catalog (events);
+const basket = new Basket(events);
+const buyer = new Buyer(events);
 const api = new Api(API_URL);
 const weblarekapi = new WebLarekApi(api);
 
