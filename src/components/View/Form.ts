@@ -40,8 +40,8 @@ export class Form<T> extends Component<IFormState> {
         this._submit.disabled = !value;
     }
 
-    set errors(value: string) {
-        this._errors.textContent = String(value);
+    set errors(value: string | string[]) {
+        this._errors.textContent = Array.isArray(value) ? value.join('; ') : String(value);
     }
 
     render(state: Partial<T> & IFormState) {

@@ -53,16 +53,16 @@ export class Buyer {
     validate(): ValidationErrors {
         const errors: ValidationErrors = {};
         if (!this._payment) {
-            errors.payment = 'Вы не выбрали способ оплаты';
+            errors.payment = 'Необходимо указать способ оплаты';
         }
         if (!this._address) {
-            errors.address = 'Вы не выбрали адресс доставки';
+            errors.address = 'Необходимо указать адрес';
         }
         if (!this._email) {
-            errors.email = 'Вы не вписали почту';
+            errors.email = 'Необходимо указать почту';
         }
         if (!this._phone) {
-            errors.phone = 'Вы не вписали номер телефона';
+            errors.phone = 'Необходимо указать номер телефона';
         }
         return errors;
     }

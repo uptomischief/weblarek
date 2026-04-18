@@ -454,3 +454,26 @@ Cеттеры:
 Поля класса:
 `_close: HTMLElement` - кнопка "За новыми покупками!"
 `_total: HTMLElement` - элемент для вывода итоговой суммы
+
+## Презентер (Presenter)
+Код расположен в `src/main.ts`
+
+### События от models
+`item:change` - каталог товаров обновлен -> получает товары, создает CardCatalog для каждого и отображает на главной (models -> Catalog)
+`preview:change` - выбран товар для просмотра -> создает CardPreview и открывает модальное окно (models -> Catalog)
+`basket:change` - меняется содержимое корзины -> обновляет счетчик в Header и перерисовывает корзину если она открыта (models -> Basket)
+`formErrors:change` - ошибки валидации -> обновляет состояние текущей формы (models -> Buyer)
+
+### События от view
+`card:remove` - удаляет товар из корзины (view -> CardPreview && CardBasket(удалить))
+`card:select` - устанавливает выбранный товаро в Catalog (view -> CardCatalog(клик))
+`card:add` - добавляет товар в корзину и закрывает модалку (view -> CardPreview(купить))
+`basket:open` - открывает модальное окно с содержимым корзины (view -> Header(клик корзина))
+`order:open` - открывает форму выбора способа оплаты (view -> BasketView(оформить))
+`order.payment:change` - сохраняет способ оплаты в Buyer (view -> OrderForm(выбор способа оплаты))
+`order.address:change` - сохраняет адрес в Buyer (view -> OrederForm(адрес))
+`order:submit` - форма ввода почты и номера телефона (view -> OrderForm(далее))
+`contacts.email:change` - сохраняет email в Buyer (view -> ContactsForm(почта))
+`contacts.phone:change` - сохраняет номер телефона в Buyer (view -> ContactsForm(номер телефона))
+`contacts:submit` - делает заказ -> отправка на сервер -> показ Success (view -> ContactsForm(оплатить))
+`modal:open` && `modal:close` - блокирует да/нет скролл страницы (view -> Modal)

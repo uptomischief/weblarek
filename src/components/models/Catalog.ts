@@ -24,7 +24,7 @@ export class Catalog {
 
     setSelectedProduct(product: IProduct):void {
         this._selectedProduct = product;
-        this.events.emit('card:select', product);
+        this.events.emit('preview:changed', product);
     }
 
     getSelectedProduct(): IProduct | null {
