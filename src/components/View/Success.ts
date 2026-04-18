@@ -24,6 +24,6 @@ export class Success extends Component<ISuccess> {
     }
 
     set total(value: number) {
-        this._total.textContent = `Списано ${String(value)} синапсов`
+        this._total.textContent = `Списано ${value.toLocaleString('ru-RU')} синапсов`
     }
 }
