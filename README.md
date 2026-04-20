@@ -411,7 +411,7 @@ Cеттеры:
 Поля класса:
 `_list: HTMLElement` - контейнер для списка товаров
 `_total: HTMLElement` - элемент итоговой стоимости
-`_b_utton: HTMLButtonElement` - кнопка "Оформить"
+`_button: HTMLButtonElement` - кнопка "Оформить"
 
 Сеттеры:
 `set items(items: HTMLElement[])` - обновить список товаров

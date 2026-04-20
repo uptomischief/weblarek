@@ -2,6 +2,7 @@ import { Form } from "./Form";
 import { IEvents } from "../base/Events";
 import { IOrder } from "../../types"; 
 import { TPayment } from "../../types";
+import { ensureAllElements } from "../../utils/utils";
 
 export class OrderForm extends Form<IOrder> {
     protected _buttons: HTMLButtonElement[];
@@ -9,11 +10,11 @@ export class OrderForm extends Form<IOrder> {
     constructor(container: HTMLFormElement, events: IEvents) {
         super(container, events);
 
-        this._buttons = Array.from(container.querySelectorAll('.button_alt'));
+        // this._buttons = Array.from(container.querySelectorAll('.button_alt'));
+        this._buttons = ensureAllElements<HTMLButtonElement>('.button_alt', container);
 
         this._buttons.forEach(button => {
             button.addEventListener('click', () => {
-                this.payment = button.name as TPayment; 
                 this.events.emit('order.payment:change', { target: button.name });
             });
         });
@@ -21,11 +22,7 @@ export class OrderForm extends Form<IOrder> {
 
     set payment(value: TPayment) {
         this._buttons.forEach(button => {
-            if (button.name === value) {
-                button.classList.add('button_alt-active');
-            } else {
-                button.classList.remove('button_alt-active');
-            }
+                button.classList.toggle('button_alt-active', button.name === value);
         });
     }
 

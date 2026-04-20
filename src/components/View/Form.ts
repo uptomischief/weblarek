@@ -1,3 +1,4 @@
+import { ensureElement } from "../../utils/utils";
 import { Component } from "../base/Component";
 import { IEvents } from "../base/Events";
 
@@ -13,8 +14,8 @@ export class Form<T> extends Component<IFormState> {
     constructor(protected container: HTMLFormElement, protected events: IEvents) {
         super(container);
 
-        this._submit = container.querySelector('button[type="submit"]') as HTMLButtonElement;
-        this._errors = container.querySelector('.form__errors') as HTMLElement;
+        this._submit = ensureElement<HTMLButtonElement>('button[type="submit"]', container);
+        this._errors = ensureElement<HTMLElement>('.form__errors', container);
 
         this.container.addEventListener('input', (e: Event) => {
             const target = e.target as HTMLInputElement;
@@ -42,12 +43,5 @@ export class Form<T> extends Component<IFormState> {
 
     set errors(value: string | string[]) {
         this._errors.textContent = Array.isArray(value) ? value.join('; ') : String(value);
-    }
-
-    render(state: Partial<T> & IFormState) {
-        const { valid, errors, ...inputs } = state;
-        super.render({ valid, errors });
-        Object.assign(this, inputs);
-        return this.container;
     }
 }

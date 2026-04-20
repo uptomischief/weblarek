@@ -1,5 +1,5 @@
+import { ensureElement } from "../../utils/utils";
 import { Component } from "../base/Component";
-import { IEvents } from "../base/Events";
 
 interface IModalData {
     content: HTMLElement;
@@ -9,11 +9,11 @@ export class Modal extends Component<IModalData> {
     protected _closeButton: HTMLButtonElement;
     protected _content: HTMLElement;
 
-    constructor(container: HTMLElement, protected events: IEvents) {
+    constructor(container: HTMLElement) {
         super(container);
 
-        this._closeButton = container.querySelector('.modal__close') as HTMLButtonElement;
-        this._content = container.querySelector('.modal__content') as HTMLElement;
+        this._closeButton = ensureElement<HTMLButtonElement>('.modal__close', container);
+        this._content = ensureElement<HTMLElement>('.modal__content', container);
 
         this._closeButton.addEventListener('click', this.close.bind(this));
         this.container.addEventListener('click', (event) => {
@@ -31,13 +31,11 @@ export class Modal extends Component<IModalData> {
     open() {
         this.container.classList.add('modal_active');
         document.addEventListener('keyup', this.handleEscUp);
-        this.events.emit('modal:open');
     }
 
     close() {
         this.container.classList.remove('modal_active');
         document.removeEventListener('keyup', this.handleEscUp);
-        this.events.emit('modal:close');
     }
 
     handleEscUp(evt: KeyboardEvent) {
