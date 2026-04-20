@@ -13,30 +13,23 @@ export class Buyer {
     // Методы класса:
     setPayment(payment: TPayment): void {
         this._payment = payment;
-        this.events.emit('formErrors:change', this.validate());
     }
 
     setAddress(address: string): void {
         this._address = address;
-        this.events.emit('formErrors:change', this.validate());
     }
 
     setPhone(phone:string): void {
         this._phone = phone;
-        this.events.emit('formErrors:change', this.validate());
     }
 
     setEmail(email:string): void {
         this._email = email;
-        this.events.emit('formErrors:change', this.validate()); 
     }
 
     getData(): IBuyer {
-        if(!this._payment) {
-            throw new Error ('Вы не выбрали способ оплаты');
-        }
         return {
-            payment: this._payment,
+            payment: this._payment!,
             address: this._address,
             email: this._email,
             phone: this._phone
@@ -65,5 +58,9 @@ export class Buyer {
             errors.phone = 'Необходимо указать номер телефона';
         }
         return errors;
+    }
+
+    changes(): void {
+        this.events.emit('buyer:changed');
     }
 }

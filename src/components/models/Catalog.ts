@@ -11,7 +11,7 @@ export class Catalog {
     // Методы класса:
     setProducts(products: IProduct[]): void {
         this._products = products;
-        this.events.emit('item:changed', {catalog: this._products});
+        this.events.emit('item:changed');
     }
 
     getProducts(): IProduct[] {
@@ -24,7 +24,7 @@ export class Catalog {
 
     setSelectedProduct(product: IProduct):void {
         this._selectedProduct = product;
-        this.events.emit('preview:changed', product);
+        this.events.emit('preview:changed');
     }
 
     getSelectedProduct(): IProduct | null {
