@@ -14,7 +14,6 @@ export class OrderForm extends Form<IOrderFormData> {
     constructor(container: HTMLFormElement, events: IEvents) {
         super(container, events);
 
-        // this._buttons = Array.from(container.querySelectorAll('.button_alt'));
         this._buttons = ensureAllElements<HTMLButtonElement>('.button_alt', container);
 
         this._buttons.forEach(button => {

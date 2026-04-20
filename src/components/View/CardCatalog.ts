@@ -35,7 +35,6 @@ export type TCardCatalog = Pick<IProduct, 'category'> & {
 
         set category(value: string) {
             this._category.textContent = value;
-            // this._category.className = 'card__category';
             for (const key in categoryMap) {
                 this._category.classList.toggle(
                     categoryMap[key as keyof typeof categoryMap],

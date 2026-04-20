@@ -29,7 +29,7 @@ export class Buyer {
 
     getData(): IBuyer {
         return {
-            payment: this._payment!,
+            payment: this._payment,
             address: this._address,
             email: this._email,
             phone: this._phone
@@ -61,6 +61,6 @@ export class Buyer {
     }
 
     changes(): void {
-        this.events.emit('buyer:changed');
+        this.events.emit('buyer:change');
     }
 }

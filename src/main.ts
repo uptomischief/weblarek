@@ -8,7 +8,7 @@ import { WebLarekApi } from './components/models/WebLarekApi';
 import { EventEmitter } from './components/base/Events';
 import { cloneTemplate, ensureElement } from './utils/utils';
 import { IProduct, TPayment } from './types';
-import { ValidationErrors } from './types';
+
 
 import { BasketView } from './components/View/BasketView';
 import { CardCatalog } from './components/View/CardCatalog';
@@ -18,7 +18,6 @@ import { ContactsForm } from './components/View/ContactsForm';
 import { Header } from './components/View/Header';
 import { Modal } from './components/View/Modal';
 import { OrderForm } from './components/View/OrderForm';
-// import { Page } from './components/View/Page';
 import { Success } from './components/View/Success';
 
 const events = new EventEmitter();
@@ -27,7 +26,7 @@ const basket = new Basket(events);
 const buyer = new Buyer(events);
 const api = new Api(API_URL);
 const weblarekapi = new WebLarekApi(api);
-// const page = new Page(document.body, events);
+
 const header = new Header(ensureElement('.header'), events);
 const modal = new Modal(ensureElement('#modal-container'));
 const gallery = ensureElement<HTMLElement>('.gallery')
@@ -48,17 +47,6 @@ const cardPreview = new CardPreview(cloneTemplate(cardPreviewTemplate), {
     onClick: () => events.emit('preview:buttonClick')
 })
 
-// function Price(price: number | null): string {
-//     return price === null ? 'Бесценно' : `${price} синапсов`;
-// }
-
-// function Image(src: string, alt: string): {src: string; alt: string} {
-//     return {
-//         src: CDN_URL + src,
-//         alt
-//     };
-// }
-
 function renderBasket() {
     const items = basket.getItems();
 
@@ -72,14 +60,6 @@ function renderBasket() {
             index: index + 1
         });
     });
-
-    // modal.render({
-    //     content: basketView.render({
-    //         items: cards, 
-    //         total: basket.getTotal(),
-    //         valid: items.length > 0
-    //     })
-    // });
 
     basketView.render({
         items: cards,

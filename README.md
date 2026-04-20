@@ -279,20 +279,6 @@ Presenter - презентер содержит основную логику п
 
 ### Классы слоя Представления 
 
-#### Класс Page
-Компонент управления основными контейнерами страницы
-
-Конструктор:
-`constructor(container: HTMLElement, events: IEvents)` - принимает корневой элемент страницы и брокер событий
-
-Поля класса:
-`_catalog: HTMLElement` - контейнер для карточек товаров на главной
-`_wrapper: HTMLElement` - основной контейнер страницы
-
-Сеттеры:
-`set catalog(items: HTMLElement[]) {}` - заменяет содержимое галереи товаров
-`set locked(value: boolean) {}` - ключает или выключает блокировку прокрутки
-
 #### Класс Header
 Отвечает за отображение основных элементов главной страницы
 
@@ -302,13 +288,9 @@ Presenter - презентер содержит основную логику п
 Поля класса:
 `_counter: HTMLElement` - элемент для отображения количества товаров в корзине
 `_basket: HTMLElement` - элемент иконки корзины
-`_catalog: HTMLElement` - контейнер для отображения карточек товаров
-`_wrapper: HTMLElement` - основной контейнер страницы
 
 Сеттеры:
 `set counter(value: number) {}` - обновляет значение счетчика товаров
-`set catalog(items: HTMLElement[]) {}` - устанавливает содержимое каталога
-`set locked(value: boolean) {}` - управляет блокировкой скролла страницы при открытии модальных окон
 
 #### Класс Card
 Базовый компонент для отображения карточки товара
@@ -373,7 +355,6 @@ Cеттеры:
 
 Сеттеры:
 `set index(value: number) {}` - устанавливает порядковый номер товара в корзине
-
 
 #### Класс Form<T>
 Сдержит общую логику валидации и работы с ощибками
@@ -448,7 +429,7 @@ Cеттеры:
 Модальное окно
 
 Конструктор:
-`constructor(container: HTMLElement, protected events: IEvents) {}` - принимает контейнер модального окна и брокер событий
+`constructor(container: HTMLElement) {}` - принимает контейнер модального окна
 
 Поля класса:
 `_content: HTMLElement` - контейнер для контента
@@ -486,11 +467,12 @@ Cеттеры:
 `item:change` - каталог товаров обновлен -> получает товары, создает CardCatalog для каждого и отображает на главной (models -> Catalog)
 `preview:change` - выбран товар для просмотра -> создает CardPreview и открывает модальное окно (models -> Catalog)
 `basket:change` - меняется содержимое корзины -> обновляет счетчик в Header и перерисовывает корзину если она открыта (models -> Basket)
-`formErrors:change` - ошибки валидации -> обновляет состояние текущей формы (models -> Buyer)
+`buyer:change` - обновить `OrderForm` и `ContactsForm`
 
 ### События от view
 `card:remove` - удаляет товар из корзины (view -> CardPreview && CardBasket(удалить))
 `card:select` - устанавливает выбранный товаро в Catalog (view -> CardCatalog(клик))
+`preview:buttonClick` - добавить или удалить из корзины, закрыть модальное окно
 `card:add` - добавляет товар в корзину и закрывает модалку (view -> CardPreview(купить))
 `basket:open` - открывает модальное окно с содержимым корзины (view -> Header(клик корзина))
 `order:open` - открывает форму выбора способа оплаты (view -> BasketView(оформить))
@@ -500,4 +482,3 @@ Cеттеры:
 `contacts.email:change` - сохраняет email в Buyer (view -> ContactsForm(почта))
 `contacts.phone:change` - сохраняет номер телефона в Buyer (view -> ContactsForm(номер телефона))
 `contacts:submit` - делает заказ -> отправка на сервер -> показ Success (view -> ContactsForm(оплатить))
-`modal:open` && `modal:close` - блокирует да/нет скролл страницы (view -> Modal)
