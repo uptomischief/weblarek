@@ -1,10 +1,14 @@
 import { Form } from "./Form";
 import { IEvents } from "../base/Events";
-import { IOrder } from "../../types"; 
 import { TPayment } from "../../types";
 import { ensureAllElements } from "../../utils/utils";
 
-export class OrderForm extends Form<IOrder> {
+export interface IOrderFormData {
+    payment: TPayment | null;
+    address: string;
+}
+
+export class OrderForm extends Form<IOrderFormData> {
     protected _buttons: HTMLButtonElement[];
 
     constructor(container: HTMLFormElement, events: IEvents) {
@@ -20,9 +24,9 @@ export class OrderForm extends Form<IOrder> {
         });
     }
 
-    set payment(value: TPayment) {
+    set payment(value: TPayment | null) {
         this._buttons.forEach(button => {
-                button.classList.toggle('button_alt-active', button.name === value);
+                button.classList.toggle('button_alt-active', value !== null && button.name === value);
         });
     }
 

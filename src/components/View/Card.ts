@@ -8,6 +8,7 @@ export interface ICard {
     // description: string;
     // image: string;
     price: number | null;
+    // price: string;
     // buttonText?: string;
     // index?: number;
 }

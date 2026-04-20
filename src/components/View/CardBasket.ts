@@ -5,7 +5,7 @@ interface ICardBasketActions {
     onClick: () => void;
 }
 
-export class CardBasket extends Card<{index: number}> {
+export class CardBasket extends Card<{ index: number }> {
     protected _index: HTMLElement;
     protected _deleteButton: HTMLButtonElement;
 

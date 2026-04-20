@@ -1,7 +1,11 @@
 import { Component } from "../base/Component";
 import { IEvents } from "../base/Events";
 
-export class Header extends Component<null> {
+interface IHeader {
+    counter: number;
+}
+
+export class Header extends Component<IHeader> {
     protected _counter: HTMLElement;
     protected _basket: HTMLButtonElement;
 

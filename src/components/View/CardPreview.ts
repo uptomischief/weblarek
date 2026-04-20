@@ -35,7 +35,7 @@ export class CardPreview extends Card<TCardPreview> {
         }
     }
 
-    set image(value: {src: string; alt?: string}) {
+    set image(value: { src: string; alt?: string }) {
         this.setImage(this._image, value.src, value.alt);
     }
 
