@@ -329,9 +329,36 @@ Cеттеры:
 Используется для отображения карточки на главной странице
 Добавляет `image: {src: string; alt?: string;};`, `category`
 
+Конструктор:
+`constructor(container: HTMLElement, actions?: ICardCatalogActions) {}` - принимает объект контейнер карточки и опционально объкет с действиями
+
+Поля класса:
+`_image: HTMLImageElement` - изображение товара
+`_category: HTMLElement` - категория товара
+
+Сеттеры:
+`set image(value: {src: string; alt?: string}) {}` - устанавливает изображение товара
+`set category(value: string) {}` - устанавливает категорию товара
+
 #### Класс CardPreview
 Дочерний компонент класса Card
 Используется для отображения детальной информации о товаре в модальном окне
+
+Конструктор:
+`constructor(container: HTMLElement, actions?: ICardPreviewActions) {}` - принимает объект контейнер карточки и опционально объкет с действиями
+
+Поля класса:
+`_image: HTMLImageElement` - изображение товара
+`_category: HTMLElement` - категория товара
+`_text: HTMLElement` - описание товара
+`_button: HTMLButtonElement` - кнопка действия
+
+Сеттеры:
+`set image(value: {src: string; alt?: string}) {}` - устанавливает изображение товара
+`set category(value: string) {}` - устанавливает категорию товара
+`set text(value: string) {}` - устанавливает описание товара
+`set buttonText(value: string) {}` - устанавливает текст на кнопке
+`set buttonNo(value: boolean) {}` - устанавливает доступность кнопки
 
 #### Класс CardBasket
 Дочерний компонент класса Card
