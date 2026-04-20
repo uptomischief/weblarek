@@ -312,37 +312,22 @@ Presenter - презентер содержит основную логику п
 
 #### Класс Card
 Базовый компонент для отображения карточки товара
-Используется для формирования карточек в каталоге, превью и корзине
 
 Конструктор:
-`constructor(container: HTMLElement, actions?: ICardActions)` - принимает контейнер карточки и объект с обработчиками событий 
+`constructor(container: HTMLElement)` - принимает контейнер карточки
 
 Поля класса:
 `_title: HTMLElement` - заголовок
 `_price: HTMLElement` - цена
-`_image?: HTMLImageElement | null` - картинка
-`_category?: HTMLElement | null` - категория
-`_description?: HTMLElement | null` - описание
-`_button?: HTMLButtonElement | null` - кнопка действия
-`_index?: HTMLElement | null` - порядковый номер
 
 Cеттеры:
 `set title(value: string)` - название товара 
 `set price(value: number | null)` - цена товара 
-`set id(value: string)` - идентификатор в dataset контейнера
-`set image(value: string)` - адрес изображения
-`set category(value: string)` - категория
-`set description(value: string)` - текст описания 
-`set buttonText(value: string)` - меняет текст на кнопке
-`set index(value: number)` - устанавливает порядеовый номер
-
-Геттеры:
-`get id(): string` - возвращает id карточки
-`get title(): string` - возвращает заголовок
 
 #### Класс CardCatalog
 Дочерний компонент класса Card
 Используется для отображения карточки на главной странице
+Добавляет `image: {src: string; alt?: string;};`, `category`
 
 #### Класс CardPreview
 Дочерний компонент класса Card
